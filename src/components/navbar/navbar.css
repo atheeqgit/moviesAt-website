@@ -1,0 +1,43 @@
+nav {
+  display: flex;
+  background-color: var(--nav-bg);
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+nav .nav-links li a {
+  color: var(--light-text);
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: 400;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+nav .nav-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+nav .nav-buttons .btn {
+  color: var(--p-green);
+  background-color: var(--btn-bg);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+nav .nav-buttons .search-btn {
+  padding: 1.5rem 2rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+nav .nav-buttons .login-btn {
+  padding: 1rem 2rem;
+}
