@@ -4,9 +4,9 @@
 .banner {
   display: block;
   /* margin: auto; */
-
-  height: 80vh;
+  height: 90vh;
   width: 100%;
+  cursor: pointer;
   /* display: flex;
   align-items: baseline;
   justify-content: left; */
@@ -36,9 +36,18 @@
   margin-bottom: 1rem;
 }
 .banner .overlay .banner-content h1 {
+  max-width: 70%;
+  line-height: 5rem;
   color: white;
   font-weight: 500;
-  font-size: 5rem;
+  font-size: 4.5rem;
+}
+.banner .overlay .banner-content .description {
+  max-width: 70%;
+
+  margin-bottom: 2rem;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 .banner .overlay .banner-content .banner-infos {

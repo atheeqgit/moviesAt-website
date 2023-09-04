@@ -1,9 +1,22 @@
 nav {
   display: flex;
-  background-color: var(--nav-bg);
+  /* background-color: var(--nav-bg); */
+  background-color: rgba(0, 0, 0, 0);
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 200;
+  transition: 300ms;
+}
+
+.nav-active {
+  background-color: var(--nav-bg);
+  box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: 0px 10px 8px -4px rgba(0, 0, 0, 0.14);
 }
 
 nav .nav-links {
@@ -12,7 +25,7 @@ nav .nav-links {
   list-style: none;
 }
 nav .nav-links li a {
-  color: var(--light-text);
+  color: white;
   text-decoration: none;
   text-transform: capitalize;
   font-weight: 400;

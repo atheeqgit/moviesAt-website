@@ -8,7 +8,7 @@ import { BsPlayCircle } from "react-icons/bs";
 // import { useNavigate } from "react-router-dom";
 // import { bannerData, BannerResponsive, brandData } from "../../../data/data";
 
-const Banner = () => {
+const Banner = ({ data }) => {
   //import { useNavigate } from "react-router-dom";
   // const navigate = useNavigate();
 
@@ -32,6 +32,8 @@ const Banner = () => {
     },
   };
 
+  const slicedData = data.slice(0, 8);
+
   return (
     <div className="banner-div">
       <Carousel
@@ -42,48 +44,50 @@ const Banner = () => {
         autoPlaySpeed={3000}
         removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
       >
-        {<Ban />}
-        {<Ban />}
-        {<Ban />}
+        {slicedData.map((item) => {
+          return (
+            <div
+              className="banner"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${item.backdrop_path})`,
+              }}
+            >
+              <div className="overlay">
+                <div className="banner-content">
+                  <h1>{item.name ? item.name : item.title}</h1>
+                  <p className="description">{item.overview}</p>
+                  <div className="banner-infos">
+                    <div className="pg-box box">
+                      {item.adult ? "pg-18" : "pg-12"}
+                    </div>
+                    <div className="hd-box box">{item.media_type}</div>
+                    <p>comedy , fantasy</p>
+                    <div className="date-time">
+                      <MdOutlineDateRange />{" "}
+                      {item.first_air_date
+                        ? item.first_air_date
+                        : item.release_date}
+                    </div>
+                    <div className="date-time">
+                      <MdOutlineDateRange /> 115min
+                    </div>
+                  </div>
+                  <div className="banner-btns">
+                    <div className="banner-btn">
+                      <BsPlayCircle />
+                      save to list
+                    </div>
+                    <div className="banner-btn">
+                      <BsPlayCircle />
+                      Watch now
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </Carousel>
-    </div>
-  );
-};
-
-const Ban = () => {
-  return (
-    <div
-      className="banner"
-      style={{
-        backgroundImage: `url(/Extraction-2.jpg)`,
-      }}
-    >
-      <div className="overlay">
-        <div className="banner-content">
-          <h1>Extraction 2</h1>
-          <div className="banner-infos">
-            <div className="pg-box box">pG-18</div>
-            <div className="hd-box box">hd</div>
-            <p>comedy , fantasy</p>
-            <div className="date-time">
-              <MdOutlineDateRange /> 27-02-2023
-            </div>
-            <div className="date-time">
-              <MdOutlineDateRange /> 115min
-            </div>
-          </div>
-          <div className="banner-btns">
-            <div className="banner-btn">
-              <BsPlayCircle />
-              save to list
-            </div>
-            <div className="banner-btn">
-              <BsPlayCircle />
-              Watch now
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

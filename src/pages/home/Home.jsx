@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Banner from "../../components/banner/Banner";
 import "./home.css";
+import axios from "axios";
 import Featured from "../../components/featured/Featured";
+import { Context } from "../../contextPage";
 
 const Home = () => {
+  const {
+    fetchAll,
+    fetchLatest,
+    fetchPopular,
+    fetchPopularTv,
+    latestMovies,
+    trendingAll,
+    popularMovies,
+    popularSeries,
+  } = useContext(Context);
+
+  useEffect(() => {
+    fetchAll();
+    fetchLatest();
+    fetchPopular();
+    fetchPopularTv();
+  }, []);
+
   return (
     <div className="home">
-      <Banner />
-      <Featured title="trending" />
-      <Featured title="latest movies" />
-      <Featured title="popular movies" />
-      <Featured title="latest series" />
+      <Banner data={trendingAll} />
+      <div className="x-padding">
+        <Featured title="trending" data={trendingAll} />
+        <Featured title="latest movies" data={latestMovies} />
+        <Featured title="popular movies" data={popularMovies} />
+        <Featured title="latest series" data={popularSeries} />
+      </div>
     </div>
   );
 };

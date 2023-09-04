@@ -1,0 +1,15 @@
+.card {
+  height: 28rem;
+  border-radius: 1rem;
+  background: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 1rem;
+  transform: scale(1);
+  cursor: pointer;
+  transition: 300ms;
+}
+.card:hover {
+  transform: scale(1.05);
+}

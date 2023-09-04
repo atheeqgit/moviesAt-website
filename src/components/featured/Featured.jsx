@@ -3,8 +3,9 @@ import Axios from "axios";
 import "./featured.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Card from "../card/Card";
 
-const Featured = (props) => {
+const Featured = ({ title, data }) => {
   // {featuredMen ? (
   //     <Carousel responsive={featuredResponsive}>
   //       {featuredMen.map((data, index) => {
@@ -14,25 +15,6 @@ const Featured = (props) => {
   //   ) : (
   //     "loading...."
   //   )}
-
-  const array = [
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-    "oppen.png",
-  ];
 
   const featuredResponsive = {
     superLargeDesktop: {
@@ -56,21 +38,11 @@ const Featured = (props) => {
 
   return (
     <div className="featured-div">
-      <h2>{props.title}</h2>
-      {array ? (
+      <h2>{title}</h2>
+      {data ? (
         <Carousel responsive={featuredResponsive}>
-          {array.map((data, index) => {
-            return (
-              <div
-                className="card"
-                key={index}
-                style={{
-                  backgroundImage: `url(/${data})`,
-                }}
-              >
-                0{" "}
-              </div>
-            );
+          {data.map((item, index) => {
+            return <Card data={item} key={index} />;
           })}
         </Carousel>
       ) : (

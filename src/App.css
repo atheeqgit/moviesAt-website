@@ -32,7 +32,46 @@ body {
   color: var(--light-text);
   background-color: var(--p-bg);
 }
-
+.featured-div .react-multi-carousel-list {
+  padding: 1rem 0;
+}
 .x-padding {
   padding: 1.5rem 4rem;
+}
+.x-margin {
+  margin: 7rem 0rem;
+}
+/* 
+.banner-div
+  .react-multi-carousel-list
+  .react-multi-carousel-track
+  .react-multi-carousel-dot
+  button {
+  border: 2px solid var(--p-green);
+}
+
+.banner-div
+  .react-multi-carousel-list
+  .react-multi-carousel-track
+  .react-multi-carousel-dot--active {
+  width: 20px;
+} */
+
+.react-multi-carousel-dot button {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 1;
+  padding: 5px 5px 5px 5px;
+  box-shadow: none;
+  transition: background 0.5s;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--p-green);
+  padding: 0;
+  margin: 0;
+  margin-right: 6px;
+  outline: 0;
+  cursor: pointer;
 }
