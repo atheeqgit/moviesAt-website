@@ -1,8 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./card.css";
-import { MdOutlineDateRange } from "react-icons/md";
-import { BsPlayCircle } from "react-icons/bs";
 
 const Card = ({ data }) => {
   const navigate = useNavigate();
@@ -10,10 +8,14 @@ const Card = ({ data }) => {
     <div
       className="card"
       onClick={() => {
-        navigate(`/selected/${data.id}`);
+        navigate(`/selected/${data.release_date ? "movie" : "tv"}/${data.id}`);
       }}
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${data.poster_path})`,
+        backgroundImage: `url(${
+          data.poster_path
+            ? "https://image.tmdb.org/t/p/original" + data.poster_path
+            : "/profile-not-found.png"
+        })`,
       }}
     ></div>
   );

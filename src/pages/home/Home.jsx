@@ -11,10 +11,10 @@ const Home = () => {
     fetchLatest,
     fetchPopular,
     fetchPopularTv,
-    latestMovies,
-    trendingAll,
     popularMovies,
     popularSeries,
+    latestMovies,
+    trendingAll,
   } = useContext(Context);
 
   useEffect(() => {

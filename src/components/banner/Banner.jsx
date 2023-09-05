@@ -2,15 +2,12 @@ import React from "react";
 import "./banner.css";
 // import { Outlet, Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { MdOutlineDateRange } from "react-icons/md";
 import { BsPlayCircle } from "react-icons/bs";
-// import { useNavigate } from "react-router-dom";
-// import { bannerData, BannerResponsive, brandData } from "../../../data/data";
+import { useNavigate } from "react-router-dom";
 
 const Banner = ({ data }) => {
-  //import { useNavigate } from "react-router-dom";
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const BannerResponsive = {
     superLargeDesktop: {
@@ -60,24 +57,35 @@ const Banner = ({ data }) => {
                     <div className="pg-box box">
                       {item.adult ? "pg-18" : "pg-12"}
                     </div>
-                    <div className="hd-box box">{item.media_type}</div>
-                    <p>comedy , fantasy</p>
+                    <div className="hd-box box">
+                      {item.media_type == "movie" ? "movie" : "series"}
+                    </div>
+                    {/* <p>comedy , fantasy</p> */}
                     <div className="date-time">
                       <MdOutlineDateRange />{" "}
                       {item.first_air_date
                         ? item.first_air_date
                         : item.release_date}
                     </div>
-                    <div className="date-time">
+                    {/* <div className="date-time">
                       <MdOutlineDateRange /> 115min
-                    </div>
+                    </div> */}
                   </div>
                   <div className="banner-btns">
                     <div className="banner-btn">
                       <BsPlayCircle />
                       save to list
                     </div>
-                    <div className="banner-btn">
+                    <div
+                      className="banner-btn"
+                      onClick={() => {
+                        navigate(
+                          `/selected/${item.release_date ? "movie" : "tv"}/${
+                            item.id
+                          }`
+                        );
+                      }}
+                    >
                       <BsPlayCircle />
                       Watch now
                     </div>

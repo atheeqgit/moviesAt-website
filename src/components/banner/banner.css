@@ -19,6 +19,9 @@
 .banner .overlay {
   display: flex;
   justify-content: left;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   align-items: end;
   width: 100%;
   height: 100%;

@@ -1,11 +1,10 @@
 .featured-div {
-  padding: 2rem 0;
-  padding-right: 1rem;
 }
 .featured-div h2 {
   font-weight: 500;
   font-size: 2.8rem;
   color: var(--light-text);
   text-transform: capitalize;
-  margin: 1rem 2rem;
+  margin: 2rem 1rem;
+  margin-bottom: 1rem;
 }

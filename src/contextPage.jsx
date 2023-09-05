@@ -9,6 +9,7 @@ export function MovieProvider({ children }) {
   const [popularMovies, setPopularMovies] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
   const [newSeries, setNewSeries] = useState([]);
+  const [details, setDetails] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
 
   const options = {
@@ -91,24 +92,13 @@ export function MovieProvider({ children }) {
       console.log(err);
     }
   };
-  const fetchDetail = async (id) => {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
-
-        options
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   //=========================================================
 
   return (
     <Context.Provider
       value={{
+        options,
         fetchLatest,
         fetchPopular,
         fetchPopularTv,
@@ -125,7 +115,6 @@ export function MovieProvider({ children }) {
         newSeries,
         fetchTopRatedSeries,
         topRatedSeries,
-        fetchDetail,
       }}
     >
       {children}
