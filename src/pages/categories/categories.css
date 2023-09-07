@@ -1,0 +1,47 @@
+.genre-page {
+  width: 100%;
+  min-height: 90vh;
+}
+
+.type-select {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+.type {
+  font-size: 2.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4rem;
+}
+.type-active {
+  background-color: var(--p-green);
+  color: black;
+}
+
+.genre-info {
+  display: flex;
+  width: fit-content;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.genre-info .genre {
+  padding: 0.5rem 1rem;
+  background-color: var(--nav-bg);
+  color: var(--light-text);
+  cursor: pointer;
+  border-radius: 2rem;
+  border: 2px solid var(--btn-bg);
+}
+.genre-info .genre-active {
+  border: 2px solid var(--p-green);
+  color: var(--p-green);
+}
+.genre-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 1fr);
+}

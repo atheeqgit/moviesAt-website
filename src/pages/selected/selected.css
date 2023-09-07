@@ -110,7 +110,9 @@
 
 .selected-content .banner-content .banner-infos {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: left;
   align-items: center;
 }
 .selected-content .banner-content .banner-infos .box {
@@ -160,4 +162,9 @@
 .selected-content .banner-content .banner-btns .banner-btn svg {
   color: var(--p-green);
   font-size: 3rem;
+}
+
+.banner-extra {
+  position: relative;
+  z-index: 10;
 }

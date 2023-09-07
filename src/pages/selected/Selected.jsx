@@ -8,6 +8,7 @@ import Carousel from "react-multi-carousel";
 import "./selected.css";
 import axios from "axios";
 import Featured from "../../components/featured/Featured";
+import ReactLoading from "react-loading";
 
 const Selected = () => {
   const castResponsive = {
@@ -33,10 +34,12 @@ const Selected = () => {
     options,
     latestMovies,
     fetchPopular,
+    fetchLatest,
     fetchPopularTv,
     popularMovies,
     popularSeries,
     topRatedSeries,
+    fetchTopRatedSeries,
   } = useContext(Context);
 
   const params = useParams();
@@ -44,6 +47,7 @@ const Selected = () => {
   const type = params.type;
 
   const [movieDetails, setMovieDetails] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchDetail = async (id, type) => {
     try {
@@ -54,6 +58,8 @@ const Selected = () => {
       setMovieDetails(response.data);
       setGenre(response.data.genres);
       fetchCast();
+      setLoading(false);
+
       //  fetchVideo();
     } catch (err) {
       console.log(err);
@@ -96,109 +102,132 @@ const Selected = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchDetail(id, type);
-    fetchPopular();
-    fetchPopularTv();
   }, [id]);
+
+  useEffect(() => {
+    if (type == "movie") {
+      fetchPopular();
+      fetchLatest();
+    } else {
+      fetchPopularTv();
+      fetchTopRatedSeries();
+    }
+  }, [type]);
   return (
     <div className="selected">
-      <div
-        className="selected-img"
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path})`,
-        }}
-      >
-        <div
-          className="selected-overlay"
-          style={{
-            backgroundImage: `url(/selected-overlay.png)`,
-            minHeight: "90vh",
-          }}
-        ></div>
-      </div>
-      <div className="selected-content ">
-        <div className="selected-poster">
-          <img
-            src={`https://image.tmdb.org/t/p/original${movieDetails?.poster_path}`}
-          />
-        </div>
-        <div className="banner-content">
-          <h1>
-            {movieDetails?.name ? movieDetails?.name : movieDetails?.title}
-          </h1>
-          <p className="description">{movieDetails?.overview}</p>
-          <div className="banner-infos">
-            <div className="pg-box box">
-              {movieDetails?.adult ? "pg-18" : "pg-12"}
-            </div>
-            <div className="hd-box box">{movieDetails?.original_language}</div>
-            <ul>
-              {genre?.map((item) => {
-                return <li> • {item.name}</li>;
-              })}
-            </ul>
-            <div className="date-time">
-              <MdOutlineDateRange />{" "}
-              {movieDetails?.first_air_date
-                ? movieDetails?.first_air_date
-                : movieDetails?.release_date}
-            </div>
-            <div className="date-time">
-              <BiTimeFive />
-              {movieDetails.runtime ? movieDetails.runtime + "mins" : "series"}
-            </div>
+      {loading ? (
+        <ReactLoading
+          type={"spinningBubbles"}
+          color={"#45ff16"}
+          height={"5rem"}
+          width={"5rem"}
+        />
+      ) : (
+        <>
+          <div
+            className="selected-img"
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path})`,
+            }}
+          >
             <div
-              className="rating"
+              className="selected-overlay"
               style={{
-                color: `${color()}`,
+                backgroundImage: `url(/selected-overlay.png)`,
+                minHeight: "90vh",
               }}
-            >
-              Rating : {Math.floor(movieDetails.vote_average)}
+            ></div>
+          </div>
+          <div className="selected-content ">
+            <div className="selected-poster">
+              <img
+                src={`https://image.tmdb.org/t/p/original${movieDetails?.poster_path}`}
+              />
+            </div>
+            <div className="banner-content">
+              <h1>
+                {movieDetails?.name ? movieDetails?.name : movieDetails?.title}
+              </h1>
+              <p className="description">{movieDetails?.overview}</p>
+              <div className="banner-infos">
+                <div className="pg-box box">
+                  {movieDetails?.adult ? "pg-18" : "pg-12"}
+                </div>
+                <div className="hd-box box">
+                  {movieDetails?.original_language}
+                </div>
+                <ul>
+                  {genre?.map((item) => {
+                    return <li> • {item.name}</li>;
+                  })}
+                </ul>
+                <div className="date-time">
+                  <MdOutlineDateRange />{" "}
+                  {movieDetails?.first_air_date
+                    ? movieDetails?.first_air_date
+                    : movieDetails?.release_date}
+                </div>
+                <div className="date-time">
+                  <BiTimeFive />
+                  {movieDetails.runtime
+                    ? movieDetails.runtime + "mins"
+                    : "series"}
+                </div>
+                <div
+                  className="rating"
+                  style={{
+                    color: `${color()}`,
+                  }}
+                >
+                  Rating : {Math.floor(movieDetails.vote_average)}
+                </div>
+              </div>
+              <div className="cast-div">
+                <Carousel responsive={castResponsive}>
+                  {castData?.map((data) => {
+                    return (
+                      <div className="cast">
+                        <img
+                          src={`${
+                            data.profile_path !== null
+                              ? "https://image.tmdb.org/t/p/original" +
+                                data.profile_path
+                              : "/profile-not-found.png"
+                          }`}
+                        />
+                        <p>{data.name}</p>
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+              <div className="banner-btns">
+                <div className="banner-btn">
+                  <BsPlayCircle />
+                  save to list
+                </div>
+                <div className="banner-btn">
+                  <BsPlayCircle />
+                  Watch now
+                </div>
+              </div>
             </div>
           </div>
-          <div className="cast-div">
-            <Carousel responsive={castResponsive}>
-              {castData?.map((data) => {
-                return (
-                  <div className="cast">
-                    <img
-                      src={`${
-                        data.profile_path !== null
-                          ? "https://image.tmdb.org/t/p/original" +
-                            data.profile_path
-                          : "/profile-not-found.png"
-                      }`}
-                    />
-                    <p>{data.name}</p>
-                  </div>
-                );
-              })}
-            </Carousel>
+          <div className="x-padding banner-extra">
+            {type == "movie" ? (
+              <>
+                <Featured title="latest movies" data={latestMovies} />
+                <Featured title="popular movies" data={popularMovies} />
+              </>
+            ) : (
+              <>
+                <Featured title="popular series" data={popularSeries} />
+                <Featured title="Top-rated series" data={topRatedSeries} />
+              </>
+            )}
           </div>
-          <div className="banner-btns">
-            <div className="banner-btn">
-              <BsPlayCircle />
-              save to list
-            </div>
-            <div className="banner-btn">
-              <BsPlayCircle />
-              Watch now
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="x-padding">
-        {type == "movie" ? (
-          <>
-            <Featured title="latest movies" data={latestMovies} />
-            <Featured title="popular movies" data={popularMovies} />
-          </>
-        ) : (
-          <>
-            <Featured title="popular series" data={popularSeries} />
-            <Featured title="Top-rated series" data={topRatedSeries} />
-          </>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 };

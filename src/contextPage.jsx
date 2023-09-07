@@ -4,12 +4,16 @@ import axios from "axios";
 export const Context = createContext();
 
 export function MovieProvider({ children }) {
+  const [loading, setLoading] = useState(true);
   const [trendingAll, setTrendingAll] = useState([]);
   const [latestMovies, setLatestMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
   const [newSeries, setNewSeries] = useState([]);
   const [details, setDetails] = useState([]);
+  const [genre, setGenre] = useState([]);
+  const [activeGenre, setActiveGenre] = useState(0);
+  const [genreResults, setGenreResults] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
 
   const options = {
@@ -29,6 +33,7 @@ export function MovieProvider({ children }) {
       );
 
       setTrendingAll(response.data.results);
+      setLoading(false);
       // console.log(response.data.results);
     } catch (err) {
       console.log(err);
@@ -42,6 +47,7 @@ export function MovieProvider({ children }) {
       );
 
       setLatestMovies(response.data.results);
+      setLoading(false);
       //   console.log(response.data.results);
     } catch (err) {
       console.log(err);
@@ -54,6 +60,7 @@ export function MovieProvider({ children }) {
         options
       );
       setPopularMovies(response.data.results);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -65,6 +72,7 @@ export function MovieProvider({ children }) {
         options
       );
       setPopularSeries(response.data.results);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -76,6 +84,7 @@ export function MovieProvider({ children }) {
         options
       );
       setNewSeries(response.data.results);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -88,6 +97,41 @@ export function MovieProvider({ children }) {
         options
       );
       setTopRatedSeries(response.data.results);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchGenre = async (type) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/genre/${type}/list?language=en`,
+        options
+      );
+      setGenre(response.data.genres);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const fetchByGenre = async (type) => {
+    try {
+      //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
+      if (activeGenre == 0) {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/discover/${type}?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`,
+          options
+        );
+        setGenreResults(response.data.results);
+      } else {
+        const APIKEY = "8beb64d8cd001db70a05c61378be3461";
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/discover/${type}?with_genres=${activeGenre}&api_key=${APIKEY}`
+        );
+        setGenreResults(response.data.results);
+      }
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -115,6 +159,15 @@ export function MovieProvider({ children }) {
         newSeries,
         fetchTopRatedSeries,
         topRatedSeries,
+        genre,
+        setGenre,
+        activeGenre,
+        setActiveGenre,
+        fetchGenre,
+        genreResults,
+        setGenreResults,
+        fetchByGenre,
+        loading,
       }}
     >
       {children}

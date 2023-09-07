@@ -3,6 +3,8 @@ import "./banner.css";
 // import { Outlet, Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import { MdOutlineDateRange } from "react-icons/md";
+import { BiTimeFive } from "react-icons/bi";
+
 import { BsPlayCircle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
