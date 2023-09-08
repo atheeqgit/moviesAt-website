@@ -19,15 +19,15 @@ const Selected = () => {
     },
     desktop: {
       breakpoint: { max: 2000, min: 1000 },
-      items: 8,
+      items: 6,
     },
     tablet: {
-      breakpoint: { max: 1000, min: 600 },
-      items: 6,
+      breakpoint: { max: 1000, min: 520 },
+      items: 7,
     },
     mobile: {
-      breakpoint: { max: 600, min: 0 },
-      items: 6,
+      breakpoint: { max: 520, min: 0 },
+      items: 5,
     },
   };
   const {
@@ -117,6 +117,7 @@ const Selected = () => {
     <div className="selected">
       {loading ? (
         <ReactLoading
+          className="x-padding x-margin"
           type={"spinningBubbles"}
           color={"#45ff16"}
           height={"5rem"}

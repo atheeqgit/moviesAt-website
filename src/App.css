@@ -41,6 +41,10 @@ body {
 .x-margin {
   margin: 7rem 0rem;
 }
+
+.app .react-multiple-carousel__arrow {
+  z-index: 99;
+}
 /* 
 .banner-div
   .react-multi-carousel-list
@@ -74,4 +78,21 @@ body {
   margin-right: 6px;
   outline: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 730px) {
+  .x-padding {
+    padding: 2rem 2.5rem;
+  }
+  .x-margin {
+    margin: 6rem 0rem;
+  }
+}
+@media screen and (max-width: 620px) {
+  .x-padding {
+    padding: 1rem 1.5rem;
+  }
+  .x-margin {
+    margin: 5rem 0rem;
+  }
 }

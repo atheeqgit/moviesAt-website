@@ -54,3 +54,51 @@ nav .nav-buttons .search-btn {
 nav .nav-buttons .login-btn {
   padding: 1rem 2rem;
 }
+.nav-links .Nav-active {
+  /* border-bottom: 2px solid var(--p-green); */
+  color: var(--p-green);
+}
+
+.menu-icons {
+  display: none;
+}
+
+@media screen and (max-width: 730px) {
+  .nav-bt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  nav {
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu-icons {
+    padding: 1.5rem;
+    display: flex;
+  }
+  nav .nav-links {
+    position: absolute;
+    right: -100%;
+    top: 10vh;
+    height: 90vh;
+    background-color: var(--nav-bg);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 3rem 1rem;
+    width: 40%;
+    overflow: scroll;
+    text-align: center;
+    transition: 300ms ease;
+  }
+  nav .show-nav {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  nav .nav-links {
+    width: 80%;
+  }
+}

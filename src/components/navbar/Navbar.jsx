@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { BiSearch } from "react-icons/bi";
+import {
+  RiMenu3Line,
+  RiCloseLine,
+  RiSunFill,
+  RiMoonFill,
+} from "react-icons/ri";
 
 import "./navbar.css";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(false);
+
+  const handleMenu = () => {
+    if (window.innerWidth < 730) {
+      setToggleMenu((toggleMenu) => !toggleMenu);
+    }
+  };
 
   useEffect(() => {
     window.onscroll = function () {
@@ -22,25 +35,59 @@ const Navbar = () => {
       <div className="logo-cont">
         <img src="/logo.png" />
       </div>
-      <ul className="nav-links">
+
+      <ul className={toggleMenu ? "nav-links show-nav" : "nav-links"}>
         <li className="nav-link">
-          <NavLink to="/">Home</NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive, isPending }) =>
+              isPending ? "" : isActive ? "Nav-active" : ""
+            }
+          >
+            Home
+          </NavLink>
         </li>
         <li className="nav-link">
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink
+            to="/movies"
+            className={({ isActive, isPending }) =>
+              isPending ? "" : isActive ? "Nav-active" : ""
+            }
+          >
+            Movies
+          </NavLink>
         </li>
         <li className="nav-link">
-          <NavLink to="/series">series</NavLink>
+          <NavLink
+            to="/series"
+            className={({ isActive, isPending }) =>
+              isPending ? "" : isActive ? "Nav-active" : ""
+            }
+          >
+            series
+          </NavLink>
         </li>
         <li className="nav-link">
-          <NavLink to="/categories">Categories</NavLink>
+          <NavLink
+            to="/categories"
+            className={({ isActive, isPending }) =>
+              isPending ? "" : isActive ? "Nav-active" : ""
+            }
+          >
+            Discover
+          </NavLink>
         </li>
       </ul>
-      <div className="nav-buttons">
-        <div className="search-btn btn">
-          <BiSearch />
+      <div className="nav-bt">
+        <div className="nav-buttons">
+          <NavLink to="/search" className="search-btn btn">
+            <BiSearch />
+          </NavLink>
+          {/* <div className="login-btn btn">Login</div> */}
         </div>
-        <div className="login-btn btn">Login</div>
+        <div className="menu-icons" onClick={handleMenu}>
+          {toggleMenu ? <RiCloseLine /> : <RiMenu3Line />}
+        </div>
       </div>
     </nav>
   );

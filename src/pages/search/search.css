@@ -1,0 +1,35 @@
+.input-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.input-div input {
+  outline: none;
+  border: 2px solid var(--nav-bg);
+  background-color: var(--btn-bg);
+  padding: 0.5rem 1rem;
+  font-size: 1.8rem;
+  font-family: inherit;
+  border-radius: 0.5rem;
+  color: var(--light-text);
+}
+.input-div input:focus {
+  border: 2px solid var(--p-green);
+}
+.input-div .btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--btn-bg);
+  color: var(--p-green);
+  border-radius: 0.5rem;
+  border: 2px solid var(--btn-bg);
+  cursor: pointer;
+}
+.input-div .btn:hover {
+  background-color: var(--nav-bg);
+  border: 2px solid var(--p-green);
+}
+.input-div .btn:active {
+  transform: scale(0.9);
+}

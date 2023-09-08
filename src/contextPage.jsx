@@ -10,11 +10,12 @@ export function MovieProvider({ children }) {
   const [popularMovies, setPopularMovies] = useState([]);
   const [popularSeries, setPopularSeries] = useState([]);
   const [newSeries, setNewSeries] = useState([]);
-  const [details, setDetails] = useState([]);
   const [genre, setGenre] = useState([]);
   const [activeGenre, setActiveGenre] = useState(0);
   const [genreResults, setGenreResults] = useState([]);
   const [topRatedSeries, setTopRatedSeries] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(null);
 
   const options = {
     method: "GET",
@@ -24,6 +25,12 @@ export function MovieProvider({ children }) {
         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YmViNjRkOGNkMDAxZGI3MGEwNWM2MTM3OGJlMzQ2MSIsInN1YiI6IjYzYzQzYTIxODUwMDVkMDBhMGUwMzBhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.mxbZahxbrvxVJOyq6XIlQQLgX0HyzLHNg7JS4AiuWIs",
     },
   };
+
+  useEffect(() => {
+    if (page < 1) {
+      setPage(1); // Increment page to 1 if it is less than 1.
+    }
+  }, [page]);
 
   const fetchAll = async () => {
     try {
@@ -48,7 +55,7 @@ export function MovieProvider({ children }) {
 
       setLatestMovies(response.data.results);
       setLoading(false);
-      //   console.log(response.data.results);
+      //console.log(response.data.results);
     } catch (err) {
       console.log(err);
     }
@@ -115,21 +122,32 @@ export function MovieProvider({ children }) {
       console.log(err);
     }
   };
+
   const fetchByGenre = async (type) => {
     try {
-      //https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc
       if (activeGenre == 0) {
         const response = await axios.get(
-          `https://api.themoviedb.org/3/discover/${type}?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`,
+          `https://api.themoviedb.org/3/discover/${type}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`,
           options
         );
-        setGenreResults(response.data.results);
+        if (page <= 1) {
+          setGenreResults(response.data.results);
+        } else {
+          setGenreResults(genreResults.concat(response.data.results));
+        }
+
+        setTotalPage(response.data.total_pages);
       } else {
         const APIKEY = "8beb64d8cd001db70a05c61378be3461";
         const response = await axios.get(
-          `https://api.themoviedb.org/3/discover/${type}?with_genres=${activeGenre}&api_key=${APIKEY}`
+          `https://api.themoviedb.org/3/discover/${type}?with_genres=${activeGenre}&api_key=${APIKEY}&page=${page}`
         );
-        setGenreResults(response.data.results);
+        if (page <= 1) {
+          setGenreResults(response.data.results);
+        } else {
+          setGenreResults(genreResults.concat(response.data.results));
+        }
+        setTotalPage(response.data.total_pages);
       }
       setLoading(false);
     } catch (err) {
@@ -168,6 +186,12 @@ export function MovieProvider({ children }) {
         setGenreResults,
         fetchByGenre,
         loading,
+        page,
+        setPage,
+        totalPage,
+        setTotalPage,
+
+        setLoading,
       }}
     >
       {children}

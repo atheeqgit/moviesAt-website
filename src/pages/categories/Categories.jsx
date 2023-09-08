@@ -5,42 +5,47 @@ import { Context } from "../../contextPage";
 import axios from "axios";
 import Card from "../../components/card/Card";
 import ReactLoading from "react-loading";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Categories = () => {
   const [type, setType] = useState("movie");
   const {
     genre,
-    setGenre,
     activeGenre,
     setActiveGenre,
     fetchGenre,
     fetchByGenre,
     genreResults,
-    loading,
+    page,
+    setPage,
+    totalPage,
+    setTotalPage,
   } = useContext(Context);
 
   useEffect(() => {
     fetchGenre(type); // Fetching Genres on Initial Render.
     setActiveGenre("");
+    setPage(1);
   }, [type]);
 
   useEffect(() => {
     fetchByGenre(type); // Fetching Genres on Initial Render.
+    setPage(1);
   }, [activeGenre]);
+
+  useEffect(() => {
+    setActiveGenre("");
+    fetchByGenre(type); // Fetching Genres on Initial Render.
+    setPage(1);
+  }, [type]);
+
   useEffect(() => {
     fetchByGenre(type); // Fetching Genres on Initial Render.
-  }, [type]);
+  }, [page]);
 
   return (
     <div className="genre-page x-margin x-padding">
-      {loading ? (
-        <ReactLoading
-          type={"spinningBubbles"}
-          color={"#45ff16"}
-          height={"5rem"}
-          width={"5rem"}
-        />
-      ) : (
+      {genre && genreResults ? (
         <>
           <div className="type-select">
             <div
@@ -62,50 +67,58 @@ const Categories = () => {
           </div>
 
           <div className="genre-info">
-            {loading ? (
-              <ReactLoading
-                type={"spinningBubbles"}
-                color={"#45ff16"}
-                height={"5rem"}
-                width={"5rem"}
-              />
-            ) : (
-              genre.map((genre) => {
-                return (
-                  <div
-                    className={
-                      activeGenre == genre.id ? "genre genre-active" : "genre"
+            {genre.map((genre) => {
+              return (
+                <div
+                  className={
+                    activeGenre == genre.id ? "genre genre-active" : "genre"
+                  }
+                  id={genre.id}
+                  onClick={() => {
+                    if (activeGenre == genre.id) {
+                      setActiveGenre(0);
+                    } else {
+                      setActiveGenre(genre.id);
                     }
-                    id={genre.id}
-                    onClick={() => {
-                      if (activeGenre == genre.id) {
-                        setActiveGenre(0);
-                      } else {
-                        setActiveGenre(genre.id);
-                      }
-                    }}
-                  >
-                    {genre.name}
-                  </div>
-                );
-              })
-            )}
+                  }}
+                >
+                  {genre.name}
+                </div>
+              );
+            })}
           </div>
-          <div className="genre-grid">
-            {genreResults ? (
-              genreResults.map((item, index) => {
-                return <Card data={item} key={index} />;
-              })
-            ) : (
+
+          <InfiniteScroll
+            className="genre-grid"
+            dataLength={genreResults.length} //This is important field to render the next data
+            next={() => {
+              setPage(page + 1);
+              fetchByGenre(type);
+            }}
+            hasMore={page < totalPage}
+            loader={
               <ReactLoading
                 type={"spinningBubbles"}
                 color={"#45ff16"}
                 height={"5rem"}
                 width={"5rem"}
               />
-            )}
-          </div>
+            }
+            scrollThreshol={0.9}
+            style={{ overflow: "hidden" }}
+          >
+            {genreResults?.map((item, index) => {
+              return <Card data={item} key={index} />;
+            })}
+          </InfiniteScroll>
         </>
+      ) : (
+        <ReactLoading
+          type={"spinningBubbles"}
+          color={"#45ff16"}
+          height={"5rem"}
+          width={"5rem"}
+        />
       )}
     </div>
   );

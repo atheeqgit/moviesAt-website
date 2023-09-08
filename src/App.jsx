@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 import Selected from "./pages/selected/Selected";
 import Series from "./pages/series/Series";
+import Search from "./pages/search/Search";
 import Movies from "./pages/movies/Movies";
 import Home from "./pages/home/Home";
 import "react-multi-carousel/lib/styles.css";
@@ -26,7 +27,7 @@ function App() {
             <Route path="/series" element={<Series />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/selected/:type/:id" element={<Selected />} />
-            {/* <Route path="/search" element={<Search />} /> */}
+            <Route path="/search" element={<Search />} />
             <Route path="*" element={<h1>not available</h1>} />
           </Routes>
         </Router>

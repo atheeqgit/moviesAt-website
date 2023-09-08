@@ -6,16 +6,6 @@ import "react-multi-carousel/lib/styles.css";
 import Card from "../card/Card";
 
 const Featured = ({ title, data }) => {
-  // {featuredMen ? (
-  //     <Carousel responsive={featuredResponsive}>
-  //       {featuredMen.map((data, index) => {
-  //         return <Product key={index} data={data} />;
-  //       })}
-  //     </Carousel>
-  //   ) : (
-  //     "loading...."
-  //   )}
-
   const featuredResponsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -27,12 +17,12 @@ const Featured = ({ title, data }) => {
       items: 6,
     },
     tablet: {
-      breakpoint: { max: 800, min: 600 },
+      breakpoint: { max: 800, min: 620 },
       items: 4,
     },
     mobile: {
       breakpoint: { max: 600, min: 0 },
-      items: 2,
+      items: 3,
     },
   };
 
