@@ -31,19 +31,19 @@ const Banner = ({ data }) => {
     },
   };
 
-  const slicedData = data.slice(0, 8);
+  // const slicedData = data.slice(0, 8);
 
   return (
     <div className="banner-div">
       <Carousel
         responsive={BannerResponsive}
-        showDots={true}
+        showDots={false}
         infinite={true}
         autoPlay={true}
         autoPlaySpeed={3000}
-        removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
+        //  removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
       >
-        {slicedData.map((item) => {
+        {data.map((item) => {
           return (
             <div
               className="banner"

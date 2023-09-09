@@ -19,15 +19,15 @@ const Selected = () => {
     },
     desktop: {
       breakpoint: { max: 2000, min: 1000 },
-      items: 6,
+      items: 7,
     },
     tablet: {
-      breakpoint: { max: 1000, min: 520 },
+      breakpoint: { max: 1000, min: 620 },
       items: 7,
     },
     mobile: {
-      breakpoint: { max: 520, min: 0 },
-      items: 5,
+      breakpoint: { max: 620, min: 0 },
+      items: 4,
     },
   };
   const {
@@ -68,15 +68,6 @@ const Selected = () => {
 
   const APIKEY = "8beb64d8cd001db70a05c61378be3461";
 
-  // const fetchVideo = async () => {
-  //   const data = await fetch(
-  //     `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${APIKEY}&language=en-US`
-  //   );
-  //   const videodata = await data.json();
-  //   // setVideo(videodata.results);
-  //   console.log(videodata.results);
-  // };
-
   const [castData, setCastdata] = useState([]);
 
   const fetchCast = async () => {
@@ -98,6 +89,10 @@ const Selected = () => {
       return "red";
     }
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -134,7 +129,7 @@ const Selected = () => {
             <div
               className="selected-overlay"
               style={{
-                backgroundImage: `url(/selected-overlay.png)`,
+                backgroundImage: `url(/selected-overlay2.png)`,
                 minHeight: "90vh",
               }}
             ></div>
@@ -142,7 +137,12 @@ const Selected = () => {
           <div className="selected-content ">
             <div className="selected-poster">
               <img
-                src={`https://image.tmdb.org/t/p/original${movieDetails?.poster_path}`}
+                src={`${
+                  movieDetails?.poster_path
+                    ? "https://image.tmdb.org/t/p/original" +
+                      `${movieDetails?.poster_path}`
+                    : "/img-not-found.png"
+                }`}
               />
             </div>
             <div className="banner-content">

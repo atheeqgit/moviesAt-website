@@ -29,7 +29,7 @@ const Card = ({ data }) => {
             backgroundImage: `url(${
               data.poster_path
                 ? "https://image.tmdb.org/t/p/original" + data.poster_path
-                : "/profile-not-found.png"
+                : "/img-not-found.png"
             })`,
           }}
         ></div>

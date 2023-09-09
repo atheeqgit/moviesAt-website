@@ -41,7 +41,7 @@
 }
 
 .selected-overlay {
-  height: 100vh;
+  height: 101vh;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -70,12 +70,7 @@
   background-size: cover;
 }
 .selected .rating {
-  padding: 0.5rem 1rem;
   text-align: center;
-  margin-left: 1rem;
-  background-color: black;
-  border-radius: 0.5rem;
-  border: 2px solid var(--p-green);
 }
 .selected-content .banner-content {
   width: 65%;
@@ -96,7 +91,8 @@
 }
 
 .selected-content .banner-content h1 {
-  line-height: 5rem;
+  line-height: 4rem;
+
   color: white;
   font-weight: 500;
   font-size: 4.5rem;
@@ -170,6 +166,9 @@
 }
 
 @media screen and (max-width: 850px) {
+  .banner-content .banner-infos ul {
+    flex-wrap: wrap;
+  }
   .selected-poster {
     padding: 1rem;
   }
@@ -190,11 +189,12 @@
   .selected-content .banner-content {
     width: 100%;
     padding: 2rem 3rem;
+    white-space: wrap;
   }
   .selected-content .banner-content h1 {
-    line-height: 3.5rem;
     color: white;
     font-weight: 500;
+    font-size: 3.5rem;
   }
   .selected-poster {
     width: 55%;
@@ -212,7 +212,6 @@
   .selected-content .banner-content .banner-btns .banner-btn {
     gap: 1rem;
     margin-top: 1rem;
-
     border-radius: 1rem;
     padding: 1rem 1.5rem;
   }
@@ -228,7 +227,7 @@
     padding: 2rem 2rem;
   }
   .selected-content .banner-content h1 {
-    line-height: 3.2rem;
+    font-size: 3rem;
   }
   .selected-poster {
     width: 65%;

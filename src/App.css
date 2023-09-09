@@ -3,9 +3,9 @@
 :root {
   --p-green: #45ff16;
   --light-text: #c7bebe;
-  --btn-bg: #3f3f3f;
-  --p-bg: #222222;
-  --nav-bg: #302f2f;
+  --btn-bg: #161616;
+  --p-bg: #080808;
+  --nav-bg: #1b1b1b;
 }
 
 * {

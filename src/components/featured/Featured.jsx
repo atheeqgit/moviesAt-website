@@ -4,8 +4,11 @@ import "./featured.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Card from "../card/Card";
+import { useNavigate } from "react-router-dom";
 
 const Featured = ({ title, data }) => {
+  const navigate = useNavigate();
+
   const featuredResponsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -28,7 +31,17 @@ const Featured = ({ title, data }) => {
 
   return (
     <div className="featured-div">
-      <h2>{title}</h2>
+      <div className="fetured-top">
+        <h2>{title}</h2>
+        <p
+          className="more"
+          onClick={() => {
+            navigate(`/categories`);
+          }}
+        >
+          view more
+        </p>
+      </div>
       {data ? (
         <Carousel responsive={featuredResponsive}>
           {data.map((item, index) => {

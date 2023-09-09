@@ -40,6 +40,9 @@ const Navbar = () => {
         <li className="nav-link">
           <NavLink
             to="/"
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
             className={({ isActive, isPending }) =>
               isPending ? "" : isActive ? "Nav-active" : ""
             }
@@ -49,6 +52,9 @@ const Navbar = () => {
         </li>
         <li className="nav-link">
           <NavLink
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
             to="/movies"
             className={({ isActive, isPending }) =>
               isPending ? "" : isActive ? "Nav-active" : ""
@@ -59,6 +65,9 @@ const Navbar = () => {
         </li>
         <li className="nav-link">
           <NavLink
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
             to="/series"
             className={({ isActive, isPending }) =>
               isPending ? "" : isActive ? "Nav-active" : ""
@@ -69,6 +78,9 @@ const Navbar = () => {
         </li>
         <li className="nav-link">
           <NavLink
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
             to="/categories"
             className={({ isActive, isPending }) =>
               isPending ? "" : isActive ? "Nav-active" : ""
@@ -80,7 +92,15 @@ const Navbar = () => {
       </ul>
       <div className="nav-bt">
         <div className="nav-buttons">
-          <NavLink to="/search" className="search-btn btn">
+          <NavLink
+            onClick={() => {
+              if (toggleMenu) {
+                setToggleMenu(!toggleMenu);
+              }
+            }}
+            to="/search"
+            className="search-btn btn"
+          >
             <BiSearch />
           </NavLink>
           {/* <div className="login-btn btn">Login</div> */}

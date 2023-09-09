@@ -7,6 +7,9 @@ import ReactLoading from "react-loading";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Search = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [available, setAvailable] = useState(true);
+
   const {
     page,
     setPage,
@@ -17,18 +20,24 @@ const Search = () => {
     options,
   } = useContext(Context);
 
-  const [searchResults, setSearchResults] = useState([]);
-
   const fetchSearch = async (input) => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/search/multi?query=${input}&include_adult=true&language=en-US&page=${page}`,
+        `https://api.themoviedb.org/3/search/multi?query=${input}&include_adult=false&language=en-US&page=${page}`,
         options
       );
 
       if (page <= 1) {
         setSearchResults(response.data.results);
+        setPage(page + 1);
+
+        if (response.data.total_results > 0) {
+          setAvailable(true);
+        } else {
+          setAvailable(false);
+        }
       } else {
+        setPage(page + 1);
         setSearchResults(searchResults.concat(response.data.results));
       }
 
@@ -40,6 +49,7 @@ const Search = () => {
     }
   };
 
+  useEffect(() => {}, []);
   const [input, setInput] = useState("");
   const [prevInput, setPrevInput] = useState("");
   return (
@@ -50,6 +60,7 @@ const Search = () => {
           placeholder="Search"
           value={input}
           onChange={(e) => {
+            setPage(1);
             setInput(e.target.value);
           }}
         />
@@ -66,29 +77,32 @@ const Search = () => {
           Search
         </div>
       </div>
-      <InfiniteScroll
-        className="genre-grid"
-        dataLength={searchResults.length} //This is important field to render the next data
-        next={() => {
-          setPage(page + 1);
-          fetchSearch(input);
-        }}
-        hasMore={page < totalPage}
-        loader={
-          <ReactLoading
-            type={"spinningBubbles"}
-            color={"#45ff16"}
-            height={"5rem"}
-            width={"5rem"}
-          />
-        }
-        scrollThreshol={0.9}
-        style={{ overflow: "hidden" }}
-      >
-        {searchResults?.map((item, index) => {
-          return <Card data={item} key={index} />;
-        })}
-      </InfiniteScroll>
+      {available ? (
+        <InfiniteScroll
+          className="genre-grid"
+          dataLength={searchResults.length} //This is important field to render the next data
+          next={() => {
+            fetchSearch(input);
+          }}
+          hasMore={page < totalPage}
+          // loader={
+          //   <ReactLoading
+          //     type={"spinningBubbles"}
+          //     color={"#45ff16"}
+          //     height={"5rem"}
+          //     width={"5rem"}
+          //   />
+          // }
+          scrollThreshol={0.9}
+          style={{ overflow: "hidden" }}
+        >
+          {searchResults?.map((item, index) => {
+            return <Card data={item} key={index} />;
+          })}
+        </InfiniteScroll>
+      ) : (
+        `Not Available :-(`
+      )}
     </div>
   );
 };

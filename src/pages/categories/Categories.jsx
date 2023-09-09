@@ -23,6 +23,10 @@ const Categories = () => {
   } = useContext(Context);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     fetchGenre(type); // Fetching Genres on Initial Render.
     setActiveGenre("");
     setPage(1);
