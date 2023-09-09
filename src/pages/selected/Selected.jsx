@@ -9,6 +9,7 @@ import "./selected.css";
 import axios from "axios";
 import Featured from "../../components/featured/Featured";
 import ReactLoading from "react-loading";
+import { useNavigate } from "react-router-dom";
 
 const Selected = () => {
   const castResponsive = {
@@ -41,6 +42,8 @@ const Selected = () => {
     topRatedSeries,
     fetchTopRatedSeries,
   } = useContext(Context);
+
+  const navigate = useNavigate();
 
   const params = useParams();
   const id = params.id;
@@ -203,11 +206,12 @@ const Selected = () => {
                 </Carousel>
               </div>
               <div className="banner-btns">
-                <div className="banner-btn">
-                  <BsPlayCircle />
-                  save to list
-                </div>
-                <div className="banner-btn">
+                <div
+                  className="banner-btn"
+                  onClick={() => {
+                    navigate(`/player/${id}`);
+                  }}
+                >
                   <BsPlayCircle />
                   Watch now
                 </div>

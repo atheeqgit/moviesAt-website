@@ -45,6 +45,30 @@ body {
 .app .react-multiple-carousel__arrow {
   z-index: 99;
 }
+
+.frame-div {
+  margin-top: 8rem;
+}
+
+.frame-div::-webkit-scrollbar {
+  display: none;
+}
+.frame::-webkit-scrollbar {
+  display: none;
+}
+
+.frame {
+  height: 90vh;
+}
+.frame html {
+  overflow: hidden;
+}
+.frame html body {
+  overflow: hidden;
+}
+.frame html body::-webkit-scrollbar {
+  display: none;
+}
 /* 
 .banner-div
   .react-multi-carousel-list
@@ -86,6 +110,9 @@ body {
   }
   .x-margin {
     margin: 6rem 0rem;
+  }
+  .frame {
+    height: 50vh;
   }
 }
 @media screen and (max-width: 620px) {

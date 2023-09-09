@@ -11,6 +11,7 @@ import Home from "./pages/home/Home";
 import "react-multi-carousel/lib/styles.css";
 import Categories from "./pages/categories/Categories";
 import { MovieProvider } from "./contextPage";
+import Player from "./pages/player/Player";
 
 function App() {
   // api key = 8beb64d8cd001db70a05c61378be3461
@@ -28,6 +29,7 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             <Route path="/selected/:type/:id" element={<Selected />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/player/:id" element={<Player />} />
             <Route path="*" element={<h1>not available</h1>} />
           </Routes>
         </Router>
