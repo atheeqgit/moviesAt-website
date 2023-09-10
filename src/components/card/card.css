@@ -29,6 +29,7 @@
 .card-rating {
   height: 4rem;
   width: 4rem;
+  z-index: 100;
   font-size: 1.6rem;
   display: flex;
   align-items: center;

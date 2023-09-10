@@ -10,6 +10,10 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [available, setAvailable] = useState(true);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     page,
     setPage,

@@ -46,11 +46,13 @@ const Card = ({ data }) => {
           <div
             className="card-rating"
             style={{
-              color: `${color(data.vote_average)}`,
-              border: `2px solid ${color(data.vote_average)}`,
+              color: `${color(data.vote_average ? data.vote_average : 0)}`,
+              border: `2px solid ${color(
+                data.vote_average ? data.vote_average : 0
+              )}`,
             }}
           >
-            {data.vote_average.toFixed(1)}
+            {data.vote_average?.toFixed(1)}
           </div>
           <p className="card-title">{data.name ? data.name : data.title}</p>
         </div>

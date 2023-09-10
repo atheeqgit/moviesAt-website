@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Player = () => {
   const params = useParams();
   const id = params.id;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const getSmashystreamUrl = (tmdbID) => {
     return `https://embed.smashystream.com/playere.php?tmdb=${tmdbID}`;

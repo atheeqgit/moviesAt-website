@@ -27,24 +27,19 @@ const Categories = () => {
   }, []);
 
   useEffect(() => {
-    fetchGenre(type); // Fetching Genres on Initial Render.
-    setActiveGenre("");
-    setPage(1);
-  }, [type]);
-
-  useEffect(() => {
-    fetchByGenre(type); // Fetching Genres on Initial Render.
+    fetchByGenre(type);
     setPage(1);
   }, [activeGenre]);
 
   useEffect(() => {
     setActiveGenre("");
-    fetchByGenre(type); // Fetching Genres on Initial Render.
+    fetchGenre(type); // Fetching Genres on Initial Render.
+    fetchByGenre(type);
     setPage(1);
   }, [type]);
 
   useEffect(() => {
-    fetchByGenre(type); // Fetching Genres on Initial Render.
+    fetchByGenre(type);
   }, [page]);
 
   return (
