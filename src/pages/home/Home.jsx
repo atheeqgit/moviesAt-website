@@ -28,7 +28,15 @@ const Home = () => {
 
   return (
     <div className="home">
-      {trendingAll && latestMovies && popularMovies && popularSeries ? (
+      {loading ? (
+        <ReactLoading
+          type={"spinningBubbles"}
+          color={"#45ff16"}
+          height={"15rem"}
+          width={"15rem"}
+          className="x-margin x-padding"
+        />
+      ) : (
         <>
           <Banner data={trendingAll} />
           <div className="x-padding">
@@ -38,13 +46,6 @@ const Home = () => {
             <Featured title="latest series" data={popularSeries} />
           </div>
         </>
-      ) : (
-        <ReactLoading
-          type={"spinningBubbles"}
-          color={"#45ff16"}
-          height={"5rem"}
-          width={"5rem"}
-        />
       )}
     </div>
   );

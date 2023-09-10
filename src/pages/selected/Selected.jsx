@@ -183,7 +183,7 @@ const Selected = () => {
                     color: `${color()}`,
                   }}
                 >
-                  Rating : {Math.floor(movieDetails.vote_average)}
+                  Rating : {movieDetails.vote_average.toFixed(1)}
                 </div>
               </div>
               <div className="cast-div">

@@ -1,24 +1,38 @@
+.featured-div {
+  margin: 1rem 0;
+}
 .featured-div h2 {
   font-weight: 400;
   font-size: 2.8rem;
   color: var(--light-text);
   text-transform: capitalize;
-  margin: 2rem 1rem;
   margin-bottom: 0;
+  color: rgb(226, 226, 226);
 }
 .fetured-top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 1.5rem 1rem;
+  margin-bottom: 0;
 }
 
 .more {
   color: var(--p-green);
   cursor: pointer;
+  font-size: 1.6rem;
 }
 @media screen and (max-width: 720px) {
   .featured-div h2 {
     font-size: 2.4rem;
+  }
+  .more {
+    font-size: 1.3rem;
+  }
+}
+@media screen and (max-width: 520px) {
+  .featured-div h2 {
+    font-size: 2rem;
   }
 }

@@ -7,6 +7,16 @@ import { Context } from "../../contextPage";
 const Card = ({ data }) => {
   const { loading } = useContext(Context);
   const navigate = useNavigate();
+
+  function color(rating) {
+    if (rating > 7) {
+      return "#45ff16";
+    } else if (rating > 5) {
+      return "yellow";
+    } else {
+      return "red";
+    }
+  }
   return (
     <>
       {loading ? (
@@ -32,7 +42,18 @@ const Card = ({ data }) => {
                 : "/img-not-found.png"
             })`,
           }}
-        ></div>
+        >
+          <div
+            className="card-rating"
+            style={{
+              color: `${color(data.vote_average)}`,
+              border: `2px solid ${color(data.vote_average)}`,
+            }}
+          >
+            {data.vote_average.toFixed(1)}
+          </div>
+          <p className="card-title">{data.name ? data.name : data.title}</p>
+        </div>
       )}
     </>
   );

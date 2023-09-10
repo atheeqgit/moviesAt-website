@@ -75,7 +75,6 @@
 .selected-content .banner-content {
   width: 65%;
   padding: 3rem 4rem;
-  white-space: nowrap;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -92,7 +91,6 @@
 
 .selected-content .banner-content h1 {
   line-height: 4rem;
-
   color: white;
   font-weight: 500;
   font-size: 4.5rem;

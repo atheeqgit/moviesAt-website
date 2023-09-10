@@ -9,9 +9,37 @@
   transform: scale(1);
   cursor: pointer;
   transition: 300ms;
+  position: relative;
+  margin-bottom: 2rem;
+}
+.card-title {
+  font-size: 1.3rem;
+  position: absolute;
+  bottom: -2.3rem;
+  left: 0.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: -webkit-fill-available;
 }
 .card:hover {
   transform: scale(1.05);
+}
+
+.card-rating {
+  height: 4rem;
+  width: 4rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nav-bg);
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
 }
 
 @media screen and (max-width: 1200px) {
@@ -42,6 +70,11 @@
   }
   .type {
     font-size: 2rem;
+  }
+  .card-rating {
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.5rem;
   }
 }
 @media screen and (max-width: 500px) {

@@ -153,7 +153,9 @@
     margin-bottom: 1rem;
     font-weight: 400;
     font-size: 1.3rem;
-    max-height: 25%;
+    overflow: hidden;
+    max-height: 18vh;
+    text-overflow: ellipsis;
   }
 
   .banner .overlay .banner-content .banner-btns .banner-btn {
@@ -162,10 +164,22 @@
     padding: 1rem;
     font-size: 1.5rem;
   }
-  .featured-div h2 {
-    font-weight: 500;
-    font-size: 2.2rem;
-    margin: 1rem 1rem;
-    margin-bottom: 0rem;
+}
+
+@media screen and (max-height: 500px) {
+  .banner-div {
+    margin-top: 8rem;
+  }
+  .banner-div .description {
+    display: none;
+  }
+  .banner .overlay .banner-content {
+    padding: 2rem 3rem;
+    padding-left: 5rem;
+  }
+
+  .banner .overlay .banner-content h1 {
+    line-height: 3.5rem;
+    font-size: 3rem;
   }
 }

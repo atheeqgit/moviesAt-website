@@ -41,7 +41,7 @@ const Navbar = () => {
           <NavLink
             to="/"
             onClick={() => {
-              setToggleMenu(!toggleMenu);
+              handleMenu();
             }}
             className={({ isActive, isPending }) =>
               isPending ? "" : isActive ? "Nav-active" : ""
@@ -53,7 +53,7 @@ const Navbar = () => {
         <li className="nav-link">
           <NavLink
             onClick={() => {
-              setToggleMenu(!toggleMenu);
+              handleMenu();
             }}
             to="/movies"
             className={({ isActive, isPending }) =>
@@ -66,7 +66,7 @@ const Navbar = () => {
         <li className="nav-link">
           <NavLink
             onClick={() => {
-              setToggleMenu(!toggleMenu);
+              handleMenu();
             }}
             to="/series"
             className={({ isActive, isPending }) =>
@@ -79,7 +79,7 @@ const Navbar = () => {
         <li className="nav-link">
           <NavLink
             onClick={() => {
-              setToggleMenu(!toggleMenu);
+              handleMenu();
             }}
             to="/categories"
             className={({ isActive, isPending }) =>
@@ -95,7 +95,7 @@ const Navbar = () => {
           <NavLink
             onClick={() => {
               if (toggleMenu) {
-                setToggleMenu(!toggleMenu);
+                handleMenu();
               }
             }}
             to="/search"
@@ -105,7 +105,12 @@ const Navbar = () => {
           </NavLink>
           {/* <div className="login-btn btn">Login</div> */}
         </div>
-        <div className="menu-icons" onClick={handleMenu}>
+        <div
+          className="menu-icons"
+          onClick={() => {
+            handleMenu();
+          }}
+        >
           {toggleMenu ? <RiCloseLine /> : <RiMenu3Line />}
         </div>
       </div>

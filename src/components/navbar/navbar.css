@@ -80,8 +80,8 @@ nav .nav-buttons .login-btn {
   nav .nav-links {
     position: absolute;
     right: -100%;
-    top: 10vh;
-    height: 80vh;
+    top: 12vh;
+    height: 70vh;
     background-color: var(--nav-bg);
     flex-direction: column;
     justify-content: flex-start;
@@ -99,6 +99,7 @@ nav .nav-buttons .login-btn {
 
 @media screen and (max-width: 620px) {
   nav .nav-links {
-    width: 80%;
+    width: 60%;
+    height: 50vh;
   }
 }
