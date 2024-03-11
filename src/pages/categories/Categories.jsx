@@ -27,6 +27,7 @@ const Categories = () => {
   }, []);
 
   useEffect(() => {
+    setActiveGenre("");
     fetchByGenre(type);
     setPage(1);
   }, [activeGenre]);
